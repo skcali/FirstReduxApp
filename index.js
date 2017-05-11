@@ -14,11 +14,9 @@ const reducer = (state=initialState, action) => {
   switch (action.type){
     case "FETCH_USERS_START" : {
       return {...state, fetching: true}
-      break;
     }
     case "FETCH_USERS_ERROR" : {
       return {...state, fetching: false, error: action.payload}
-      break;
     }
     case "RECEIVE_USERS" : {
       return {
@@ -27,16 +25,14 @@ const reducer = (state=initialState, action) => {
         fetched: true, 
         users: action.payload
       }
-      break;
     }
   }
   return state
 }
-/* eslint-disable no-underscore-dangle */
-//const devToolEx = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
 const middleware = applyMiddleware(thunk, createLogger())
 const store = createStore(reducer, middleware);
-/* eslint-enable */
+
 store.dispatch((dispatch) => {
   dispatch({type: "FETCH_USERS_START"})
   axios.get("http://rest.learncode.academy/api/wstern/users")
